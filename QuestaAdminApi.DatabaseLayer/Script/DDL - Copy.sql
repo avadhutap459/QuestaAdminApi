@@ -25,6 +25,14 @@ BEGIN
     alter table mstHumanResourceRepo drop column LinkCount
 END
 
+IF EXISTS(SELECT 1 FROM sys.columns WHERE NAME = N'HrId' AND Object_ID = Object_ID(N'txnCandidate'))
+BEGIN
+
+	alter table txnCandidate add HrId int not null DEFAULT 2
+
+	ALTER TABLE txnCandidate ADD CONSTRAINT FK_TxnCandidate_mstHumanResource_HrId FOREIGN KEY (HrId)
+    REFERENCES mstHumanResourceRepo(HrId);
+END
 
 IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND  TABLE_NAME = 'mstmailConfigByAssessment'))
 BEGIN

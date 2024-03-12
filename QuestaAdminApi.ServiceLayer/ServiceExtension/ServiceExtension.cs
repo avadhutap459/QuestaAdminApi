@@ -12,7 +12,8 @@ namespace QuestaAdminApi.ServiceLayer.ServiceExtension
             service.AddSingleton<ICrendential, ClsCrendential>();
             service.AddSingleton<IAesOperation, ClsAesOperation>();
             service.AddSingleton<IJsonConverter, ClsJsonConverter>();
-            
+            service.AddSingleton<IMaster, ClsMasterData>();
+            service.AddSingleton<ILinkGeneration, ClsLinkGeneration>();
 
             return service;
         }
